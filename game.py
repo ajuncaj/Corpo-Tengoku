@@ -68,25 +68,27 @@ while running:
 
     # fill the screen with a color to wipe away anything from last frame
     screen.fill("purple")
-    textureRect = pygame.Rect(64, 0, 64, 64)
+    textureRect = pygame.Rect(0, 0, 64, 64)
 
     beats.update_beat()
-    if (beats.get_clock() >= beats.get_absTime() * 0.9):
-        textureRect = pygame.Rect(64, 64, 64, 64)
-        pygame.mixer.Sound.play(buttonSound)
+
+    # Rough beat: Do stuff within a few frames of a beat
+    # *Do sprites here*
+    #if (beats.get_clock() >= beats.get_absTime() * 0.9):
+        #textureRect = pygame.Rect(64, 0, 64, 64)
+    # Actual beat: Do stuff once on the beat
     if (beats.get_beat_this_tick()):
-        textureRect = pygame.Rect(64, 64, 64, 64)
         pygame.mixer.Sound.play(buttonSound)
     
     # check left / right mouse presses
     keys = pygame.key.get_pressed()
     if keys[pygame.K_a]:
-        
+        textureRect = pygame.Rect(64, 0, 64, 64)
         pygame.mixer.Sound.play(buttonSound)
     if keys[pygame.K_l]:
-        pygame.draw.circle(screen, "blue", player_pos, 40, 
-                           draw_bottom_left = False, draw_top_left = False)
+        textureRect = pygame.Rect(64, 0, 64, 64)
         pygame.mixer.Sound.play(buttonSound)
+    
     
     screen.blit(button_sprites,player_pos,textureRect)
     
